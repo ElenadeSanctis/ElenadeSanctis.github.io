@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elena de Sanctis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: colonna singola stretta, nav testuale in alto, pagine instradate su #hash */
+:root{
+  --bg:#f2f5f6; --surface:#e6ecee; --fg:#17232b; --muted:#5b6b75; --rule:#cfd9dd;
+  --accent:#1d5c7a; --accent-2:#3f7d5c;
+  --display:"Newsreader",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171c; --surface:#16222a; --fg:#e3eaee; --muted:#93a5af; --rule:#24343d;
+  --accent:#7fc0de; --accent-2:#8cc9a6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f171c; --surface:#16222a; --fg:#e3eaee; --muted:#93a5af; --rule:#24343d;
+  --accent:#7fc0de; --accent-2:#8cc9a6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:680px;margin:0 auto;padding-block:28px 40px;display:flex;flex-direction:column;min-height:100vh}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding-bottom:14px;border-bottom:1px solid var(--rule)}
+nav{display:flex;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:14px}
+nav a{color:var(--muted);border:0}
+nav a[aria-current="page"]{color:var(--fg);box-shadow:inset 0 -2px 0 var(--accent-2)}
+nav a:hover{color:var(--fg)}
+#theme{background:none;border:1px solid var(--rule);color:var(--fg);width:34px;height:34px;border-radius:50%;
+  font-size:16px;cursor:pointer;line-height:1}
+#theme:hover{border-color:var(--accent)}
+
+main{flex:1;padding-top:56px}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,6vw,3.1rem);line-height:1.08;letter-spacing:-.01em}
+h2{font-size:1.55rem;margin-top:48px;margin-bottom:18px}
+h3{font-size:1.15rem;font-weight:600}
+.lede{font-size:1.12rem;color:var(--muted);max-width:58ch;margin:18px 0 0}
+.coords{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em;margin-top:28px;
+  display:flex;gap:18px;flex-wrap:wrap}
+.coords span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--accent-2);margin-right:8px;vertical-align:1px}
+.interest{margin-top:40px;padding:18px 20px;background:var(--surface);border-radius:4px;max-width:58ch}
+.interest p{margin:0}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+/* bio */
+.facts{display:grid;grid-template-columns:max-content 1fr;gap:6px 24px;margin:20px 0 0}
+.facts dt{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.facts dd{margin:0}
+.timeline{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:22px}
+.timeline li{display:grid;grid-template-columns:150px 1fr;gap:16px}
+.when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.timeline p{margin:2px 0 0;color:var(--muted)}
+
+/* progetti / corsi */
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tags span{font-family:var(--mono);font-size:11.5px;padding:2px 8px;border:1px solid var(--rule);border-radius:3px;color:var(--muted)}
+.list ul{margin:8px 0 0;padding-left:18px;color:var(--muted)}
+.list ul li{padding:2px 0;border:0}
+.list ul li:last-child{border:0}
+.courses{columns:2 220px;column-gap:28px;padding-left:18px;margin:0}
+.courses li{break-inside:avoid;padding:3px 0}
+.list{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column}
+.list li{padding:20px 0;border-top:1px solid var(--rule);min-width:0}
+.list li:last-child{border-bottom:1px solid var(--rule)}
+.list p{margin:6px 0 8px}
+.meta{font-family:var(--mono);font-size:12.5px;color:var(--accent-2)}
+.todo{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:28px}
+
+footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--muted);
+  display:flex;gap:10px 20px;flex-wrap:wrap;align-items:center}
+footer .sp{flex:1}
+
+@media (max-width:520px){
+  .timeline li{grid-template-columns:1fr;gap:2px}
+  main{padding-top:36px}
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <nav aria-label="Sections">
+      <a href="#home">home</a>
+      <a href="#bio">bio</a>
+      <a href="#projects">projects</a>
+      <a href="#coursework">coursework</a>
+    </nav>
+    <button id="theme" type="button" aria-label="Toggle light/dark theme">☾</button>
+  </header>
+
+  <main>
+    <section data-view="home">
+      <h1>Elena de Sanctis</h1>
+      <p class="lede">MSc student in Mathematical Engineering (Computational Science and Computational Learning) at Politecnico di Milano, currently on exchange at Linköping University.</p>
+      <div class="coords"><span>Milan, IT</span><span>Linköping, SE</span></div>
+      <div class="interest">
+        <div class="label">Interests</div>
+        <p>Numerical methods and large-scale simulation: computational fluid dynamics, fracture mechanics, and their applications to medicine and pharmacology.</p>
+      </div>
+    </section>
+
+    <section data-view="bio" hidden>
+      <h1>Bio</h1>
+      <dl class="facts">
+        <dt>Born in</dt><dd>Rieti, Italy</dd>
+        <dt>Current city</dt><dd>Linköping, Sweden</dd>
+        <dt>Languages</dt><dd>Italian (native), English (B2, Cambridge FCE)</dd>
+        <dt>CV</dt><dd><a href="Elena_de_Sanctis_CV.pdf" target="_blank" rel="noopener">Curriculum Vitae (PDF)</a></dd>
+      </dl>
+
+      <h2>Education</h2>
+      <ol class="timeline">
+        <li><div class="when">Aug 2026 — now</div>
+          <div><h3>Linköping University</h3><p>Exchange semester · Linköping, Sweden</p></div></li>
+        <li><div class="when">Sep 2025 — now</div>
+          <div><h3>Politecnico di Milano</h3><p>MSc in Mathematical Engineering, Computational Science and Computational Learning · Milan, Italy</p></div></li>
+        <li><div class="when">Sep 2022 — Sep 2025</div>
+          <div><h3>Politecnico di Milano</h3><p>BSc in Mathematical Engineering · Milan, Italy</p></div></li>
+      </ol>
+
+      <h2>Skills</h2>
+      <dl class="facts">
+        <dt>Programming</dt><dd>C/C++, MATLAB, R, LaTeX</dd>
+        <dt>Software</dt><dd>Ansys Fluent, ANSA, ParaView, HPC clusters (Slurm)</dd>
+      </dl>
+
+      <h2>Beyond engineering</h2>
+      <ol class="timeline">
+        <li><div class="when">2020 — now</div>
+          <div><h3>Leo Club Rieti Host</h3><p>Youth branch of Lions Clubs International · President 2023/24, Vice-President 2021/22</p></div></li>
+        <li><div class="when">2022 — now</div>
+          <div><h3>AIM</h3><p>Member of the Association of Mathematical Engineers</p></div></li>
+      </ol>
+    </section>
+
+    <section data-view="projects" hidden>
+      <h1>Projects</h1>
+      <ul class="list">
+        <li><h3>Phase-Field Fracture Propagation</h3>
+          <p>A C++ solver for brittle fracture that couples elastic equilibrium with a phase-field damage model on a Material Point Method discretisation.</p>
+          <ul>
+            <li>Fully explicit, matrix-free scheme: CFL-limited momentum update and damped Jacobi for the phase field, with no global linear solve.</li>
+            <li>Reproduces the single-edge-notched shear test and dynamic crack branching; shear stiffness matches the analytical value to five significant digits.</li>
+          </ul>
+          <div class="tags"><span>C++</span><span>MPM</span><span>explicit solvers</span></div>
+          <div class="meta" style="margin-top:10px">Ongoing · spring 2026, now being parallelised</div></li>
+        <li><h3>Smoke Dispersion from a Vehicle Fire</h3>
+          <p>Steady RANS simulations of smoke from a bus fire on the Linköping University campus to identify the buildings most at risk.</p>
+          <ul>
+            <li>20-million-cell meshes run on the NSC Sigma HPC cluster with scripted Fluent journals.</li>
+            <li>20 years of hourly wind data reduced to five cases with k-means, combined into probability-weighted exposure maps.</li>
+            <li>Co-authored a scientific paper and presented a poster.</li>
+          </ul>
+          <div class="tags"><span>Ansys Fluent</span><span>MATLAB</span><span>ParaView</span><span>HPC</span></div>
+          <div class="meta" style="margin-top:10px">Course project · fall 2026</div></li>
+        <li><h3>External Aerodynamics of the DrivAer Car</h3>
+          <p>An automated pipeline from CAD to post-processing for the DrivAer reference vehicle, with moving ground and rotating wheels.</p>
+          <ul>
+            <li>Parametric Scheme script for Fluent Meshing producing a 9.3-million-cell poly-hexcore mesh with 10 prism layers.</li>
+            <li>Realizable k–ε RANS at 20 m/s, run in batch on the NSC Sigma cluster; ParaView post-processing in Python.</li>
+          </ul>
+          <div class="tags"><span>ANSA</span><span>Ansys Fluent</span><span>ParaView</span><span>Python</span></div>
+          <div class="meta" style="margin-top:10px">Course project · fall 2026</div></li>
+      </ul>
+    </section>
+
+    <section data-view="coursework" hidden>
+      <h1>Coursework</h1>
+      <h2>Linköping University</h2>
+      <ul class="courses">
+        <li>Applied Computational Fluid Dynamics</li><li>Fluid Mechanics</li><li>Mathematical Models in Biology</li>
+        <li>Medical Image Analysis</li><li>Text Mining</li>
+      </ul>
+      <h2>Politecnico di Milano, MSc</h2>
+      <ul class="courses">
+        <li>Real and Functional Analysis</li><li>Advanced Partial Differential Equations</li>
+        <li>Numerical Analysis for PDEs</li><li>Algorithms and Parallel Computing</li>
+        <li>Advanced Programming for Scientific Computing</li><li>Fluid Dynamics</li><li>Computational Fluid Dynamics</li>
+      </ul>
+      <h2>Politecnico di Milano, BSc</h2>
+      <ul class="courses">
+        <li>Probability Theory</li><li>Statistical Inference</li><li>Numerical Analysis</li>
+        <li>Linear Algebra</li><li>Partial Differential Equations</li><li>Functional and Complex Analysis</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Elena de Sanctis</span>
+    <span class="sp"></span>
+    <span>ellidesanctis[at]gmail.com</span>
+    <a href="https://github.com/ElenadeSanctis" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/elena-de-sanctis-988266246/" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+<script>
+(function(){
+  var views=["home","bio","projects","coursework"];
+  function show(){
+    var v=(location.hash||"#home").slice(1); if(views.indexOf(v)<0) v="home";
+    document.querySelectorAll("[data-view]").forEach(function(s){s.hidden=s.dataset.view!==v});
+    document.querySelectorAll("nav a").forEach(function(a){
+      if(a.getAttribute("href")==="#"+v) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",show); show();
+
+  var root=document.documentElement, btn=document.getElementById("theme");
+  function isDark(){var t=root.getAttribute("data-theme"); if(t) return t==="dark";
+    return matchMedia("(prefers-color-scheme: dark)").matches;}
+  function sync(){btn.textContent=isDark()?"☀":"☾";}
+  try{var saved=localStorage.getItem("theme"); if(saved) root.setAttribute("data-theme",saved);}catch(e){}
+  btn.addEventListener("click",function(){
+    var next=isDark()?"light":"dark"; root.setAttribute("data-theme",next);
+    try{localStorage.setItem("theme",next);}catch(e){} sync();});
+  sync();
+})();
+</script>
+</body>
+</html>
