@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Phase-Field Fracture Propagation — Elena de Sanctis</title>
+  <meta name="description" content="An explicit, matrix-free C++ solver for brittle fracture on a Material Point Method discretisation.">
+  <meta name="author" content="Elena de Sanctis">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation"><a href="../index.html">home</a><a href="../bio.html">bio</a><a href="../projects.html" aria-current="page">projects</a></nav><button class="theme-toggle" type="button" aria-label="Switch to dark mode">☾</button>
+<main class="page subpage">
+  <header class="detail-hero reveal">
+    <p class="eyebrow">Ongoing · spring 2026</p>
+    <h1>Phase-Field Fracture Propagation</h1>
+    <p class="lede">A C++ solver for brittle fracture that couples the equilibrium equation with a phase-field damage model on a Material Point Method discretisation.</p>
+  </header>
+  <div class="detail-body reveal">
+    <div class="project-meta"><div><strong>Type</strong><p>Personal research project</p></div><div><strong>Period</strong><p>Spring 2026 — ongoing</p></div><div><strong>Language</strong><p>C++</p></div></div>
+    <h2>Overview</h2>
+    <p>The solver was developed incrementally, from the one-dimensional quasi-static case to the two-dimensional time-dependent one. A spectral decomposition of the elastic energy ensures that only tensile strain drives damage.</p><p>The implicit schemes of the reference papers were reformulated into a fully explicit, matrix-free algorithm: an explicit momentum update under a CFL time step, and a damped Jacobi iteration for the elliptic phase-field equation. No global linear solve is needed. A parallel implementation is now in progress.</p>
+    <h2 style="margin-top:40px">Results</h2>
+    <ul><li>Reproduced the quasi-static single-edge-notched shear test and the dynamic crack branching benchmark from the reference literature.</li><li>Verified the mechanical solver independently against the analytical shear stiffness, matching it to five significant digits.</li></ul>
+    <div class="tags" style="margin-top:34px"><span>C++</span><span>Material Point Method</span><span>Phase field</span><span>Explicit solvers</span></div>
+    <a class="back" href="../projects.html">← back to projects</a>
+  </div>
+</main>
+<footer class="page footer"><span>© 2026 Elena de Sanctis · ellidesanctis[at]gmail.com</span><span class="footer-links"><a href="https://github.com/ElenadeSanctis" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/elena-de-sanctis-988266246/" target="_blank" rel="noopener">LinkedIn</a></span></footer>
+</body>
+</html>
